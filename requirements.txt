@@ -4,4 +4,6 @@ bcolz-zipline
 prettytable
 menpo
 mxnet
-opencv-python
+opencv-python-headless>=4.6.0
+streamlit
+streamlit-option-menu
