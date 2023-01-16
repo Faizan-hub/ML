@@ -35,7 +35,7 @@ if __name__ == "__main__":
     image = None
     image2 = None
     try:
-        st.set_page_config(layout="wide")
+#         st.set_page_config(layout="wide")
         with st.sidebar:
             selected = option_menu('My Projects',
 
