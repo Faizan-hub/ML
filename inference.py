@@ -66,33 +66,33 @@ if __name__ == "__main__":
         if image is None or image2 is None:
             st.error("Please upload both images.")
         else:
-            try:
-                model = load_pretrained_model('ir_50')
-                features = []
-                # temp1 = image.convert('rgb')
-                aligned_rgb_img1 = align.get_aligned_face(None, rgb_pil_image=image)
-                bgr_tensor_input1 = to_input(aligned_rgb_img1)
-                feature1, _ = model(bgr_tensor_input1)
-                features.append(feature1)
-                # temp2 = image2.convert('rgb')
-                aligned_rgb_img2 = align.get_aligned_face(None, rgb_pil_image=image2)
-                bgr_tensor_input2 = to_input(aligned_rgb_img2)
-                feature2, _ = model(bgr_tensor_input2)
-                features.append(feature2)
-                similarity_scores = torch.cat(features) @ torch.cat(features).T
-                similarity_scores = similarity_scores[0][1]
-                result = round(similarity_scores.item(), 3)
-                score = "No match"
-                if result > 0.9:
-                    score = "Perfect match"
-                elif result >= 0.75 and result <= 0.9:
-                    score = "Excellent match"
-                elif result >= 0.5 and result < 0.75:
-                    score = "Good match"
-                match_para = '<p style="font-family:Courier; color:Black; font-size: 40px;"><b>Type of match: {match}</b></p>'.format(match=score)
-                sim_para = '<p style="font-family:Courier; color:Black; font-size: 40px;"><b>Similarity Score: {sim}</b></p>'.format(sim=result)
-                st.markdown(match_para, unsafe_allow_html=True)
-                st.markdown(sim_para, unsafe_allow_html=True)
-            except:
-                st.warning("Model Busy")
+            # try:
+            model = load_pretrained_model('ir_50')
+            features = []
+            # temp1 = image.convert('rgb')
+            aligned_rgb_img1 = align.get_aligned_face(None, rgb_pil_image=image)
+            bgr_tensor_input1 = to_input(aligned_rgb_img1)
+            feature1, _ = model(bgr_tensor_input1)
+            features.append(feature1)
+            # temp2 = image2.convert('rgb')
+            aligned_rgb_img2 = align.get_aligned_face(None, rgb_pil_image=image2)
+            bgr_tensor_input2 = to_input(aligned_rgb_img2)
+            feature2, _ = model(bgr_tensor_input2)
+            features.append(feature2)
+            similarity_scores = torch.cat(features) @ torch.cat(features).T
+            similarity_scores = similarity_scores[0][1]
+            result = round(similarity_scores.item(), 3)
+            score = "No match"
+            if result > 0.9:
+                score = "Perfect match"
+            elif result >= 0.75 and result <= 0.9:
+                score = "Excellent match"
+            elif result >= 0.5 and result < 0.75:
+                score = "Good match"
+            match_para = '<p style="font-family:Courier; color:Black; font-size: 40px;"><b>Type of match: {match}</b></p>'.format(match=score)
+            sim_para = '<p style="font-family:Courier; color:Black; font-size: 40px;"><b>Similarity Score: {sim}</b></p>'.format(sim=result)
+            st.markdown(match_para, unsafe_allow_html=True)
+            st.markdown(sim_para, unsafe_allow_html=True)
+            # except:
+            #     st.warning("Model Busy")
 
