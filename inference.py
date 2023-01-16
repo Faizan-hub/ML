@@ -19,7 +19,7 @@ def load_pretrained_model(architecture='ir_50'):
     # load model and pretrained statedict
     assert architecture in adaface_models.keys()
     model = net.build_model(architecture)
-    statedict = torch.load(adaface_models[architecture])['state_dict']
+    statedict = torch.load(adaface_models[architecture], map_location ='cpu')['state_dict']
     model_statedict = {key[6:]:val for key, val in statedict.items() if key.startswith('model.')}
     model.load_state_dict(model_statedict)
     model.eval()
