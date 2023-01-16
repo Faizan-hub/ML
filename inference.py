@@ -94,5 +94,5 @@ if __name__ == "__main__":
                 st.markdown(match_para, unsafe_allow_html=True)
                 st.markdown(sim_para, unsafe_allow_html=True)
             except:
-                st.warning("Model Busy")
+                st.warning("Model can't process these images")
 
